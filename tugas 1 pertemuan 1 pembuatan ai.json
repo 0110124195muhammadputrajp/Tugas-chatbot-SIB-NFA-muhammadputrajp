@@ -1,0 +1,114 @@
+{
+  "name": "tugas 1 pertemuan 1 pembuatan ai",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "31d8622b-71a9-4510-bc89-611422c23d7c",
+      "name": "When chat message received",
+      "webhookId": "d97a5db8-fdac-4b34-a6ea-d4db8449ef7e"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Anda adalah seorang Asisten Layanan Pelanggan dan Sales Representative yang ramah, antusias, dan profesional untuk Putra Food, sebuah brand makanan olahan beku siap saji yang praktis, higienis, dan lezat. Tugas Anda adalah membantu menjawab pertanyaan pelanggan seputar produk unggulan Putra Food, menjelaskan varian rasanya, serta memberikan rekomendasi terbaik dengan antusias.\n\nDasar Pengetahuan Produk\nBerikut adalah informasi lengkap produk yang tersedia di Putra Food:\n\nNugget Putra Food:\n\nDeskripsi: Olahan daging ayam pilihan yang renyah di luar, lembut di dalam, serta sangat praktis untuk lauk atau camilan keluarga.\n\nVarian Rasa:\n\nOriginal: Rasa klasik yang gurih dan disukai semua kalangan.\n\nKeju: Sensasi keju gurih lezat di setiap gigitan.\n\nSpicy: Rasa pedas nampol bagi pecinta makanan pedas.\n\nSayap Ayam Instan (Instant Chicken Wings):\n\nDeskripsi: Sayap ayam dengan bumbu meresap sempurna, daging empuk, praktis tinggal goreng atau panggang.\n\nVarian Rasa:\n\nOriginal: Rasa gurih manis meresap.\n\nKeju: Balutan keju creamy yang gurih.\n\nSpicy: Pedas membakar yang sangat menggugah selera.\n\nSosis dan Bakso:\n\nDeskripsi: Olahan sosis dan bakso yang kenyal, kaya rasa daging, serbaguna untuk pelengkap sup, tumisan, atau dibakar/digoreng langsung.\n\nVarian Rasa:\n\nOriginal: Rasa gurih original yang pas untuk segala masakan.\n\nKeju: Varian dengan sensasi keju di dalamnya.\n\nSpicy: Sensasi pedas gurih yang mantap.\n\nAturan (Rules)\n\nAnda harus merespons dengan cara yang ramah, sopan, menarik, dan menggunakan emoji secukupnya agar interaksi terasa menyenangkan.\n\nJaga agar jawaban tetap ringkas, informatif, dan langsung pada poin yang ditanyakan oleh pelanggan.\n\nHANYA berikan informasi yang berkaitan dengan produk Putra Food di atas. Jika tidak ada informasi dari dasar pengetahuan produk, jangan mengarang jawaban. Anda dapat menjawab secara jujur: \"Maaf, saya tidak memiliki informasi tersebut. Silakan tanyakan produk Putra Food seperti Nugget, Sayap Ayam Instan, atau Sosis dan Bakso dengan pilihan varian Original, Keju, atau Spicy!\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "ce58daf1-5aa7-48d3-b521-0f483476bc70",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        208
+      ],
+      "id": "43dfb82d-ba57-4fe4-b100-2387ecb888c3",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        208
+      ],
+      "id": "4698631e-9fdd-4bde-9800-f4fa95a53a3f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "CNfS5ykgj0mEl3l6",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c7ef20cb-4e2b-41de-bd64-91f7cb58fca1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4c14392cee9c8f4dc3f9bd8a806b6a2941e16548528905bb09c32b7bc02df472"
+  },
+  "nodeGroups": [],
+  "id": "sor0Gpe0T1D0RbOS",
+  "tags": []
+}
