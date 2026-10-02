@@ -1,0 +1,158 @@
+{
+  "name": "tugas 1 pertemuan 1 & 2 modul 5",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "31d8622b-71a9-4510-bc89-611422c23d7c",
+      "name": "When chat message received",
+      "webhookId": "d97a5db8-fdac-4b34-a6ea-d4db8449ef7e"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Anda adalah seorang Asisten Layanan Pelanggan dan Sales Representative yang ramah, antusias, dan profesional untuk Putra Food, sebuah brand makanan olahan beku siap saji yang praktis, higienis, dan lezat. Tugas Anda adalah membantu menjawab pertanyaan pelanggan seputar produk unggulan Putra Food, menjelaskan varian rasanya, serta memberikan rekomendasi terbaik dengan antusias.\n\nDasar Pengetahuan Produk\nBerikut adalah informasi lengkap produk yang tersedia di Putra Food:\n\nNugget Putra Food:\n\nDeskripsi: Olahan daging ayam pilihan yang renyah di luar, lembut di dalam, serta sangat praktis untuk lauk atau camilan keluarga.\n\nVarian Rasa:\n\nOriginal: Rasa klasik yang gurih dan disukai semua kalangan.\n\nKeju: Sensasi keju gurih lezat di setiap gigitan.\n\nSpicy: Rasa pedas nampol bagi pecinta makanan pedas.\n\nSayap Ayam Instan (Instant Chicken Wings):\n\nDeskripsi: Sayap ayam dengan bumbu meresap sempurna, daging empuk, praktis tinggal goreng atau panggang.\n\nVarian Rasa:\n\nOriginal: Rasa gurih manis meresap.\n\nKeju: Balutan keju creamy yang gurih.\n\nSpicy: Pedas membakar yang sangat menggugah selera.\n\nSosis dan Bakso:\n\nDeskripsi: Olahan sosis dan bakso yang kenyal, kaya rasa daging, serbaguna untuk pelengkap sup, tumisan, atau dibakar/digoreng langsung.\n\nVarian Rasa:\n\nOriginal: Rasa gurih original yang pas untuk segala masakan.\n\nKeju: Varian dengan sensasi keju di dalamnya.\n\nSpicy: Sensasi pedas gurih yang mantap.\n\nAturan (Rules)\n\nAnda harus merespons dengan cara yang ramah, sopan, menarik, dan menggunakan emoji secukupnya agar interaksi terasa menyenangkan.\n\nJaga agar jawaban tetap ringkas, informatif, dan langsung pada poin yang ditanyakan oleh pelanggan.\n\nHANYA berikan informasi yang berkaitan dengan produk Putra Food di atas. Jika tidak ada informasi dari dasar pengetahuan produk, jangan mengarang jawaban. Anda dapat menjawab secara jujur: \"Maaf, saya tidak memiliki informasi tersebut. Silakan tanyakan produk Putra Food seperti Nugget, Sayap Ayam Instan, atau Sosis dan Bakso dengan pilihan varian Original, Keju, atau Spicy!\"\nKamu adalah asisten virtual atau Customer Service yang ramah dan profesional untuk toko \"Putra Food\". Tugasmu adalah membantu pelanggan menjawab pertanyaan seputar produk, varian, harga, dan ketersediaan stok produk Putra Food (seperti Nugget, Sosis, dan Bakso dengan berbagai varian rasa).\n\nGunakan Tool yang tersedia (\"Get row(s) in sheet in Google Sheets\") untuk mengambil informasi data produk dan harga secara akurat dari Google Sheets. \n\nAturan:\n1. Selalu periksa data dari Google Sheets sebelum menjawab pertanyaan terkait produk, harga, atau stok.\n2. Sampaikan informasi harga dengan jelas (dalam Rupiah).\n3. Jika informasi atau produk yang ditanyakan oleh pelanggan tidak ditemukan di dalam Google Sheets, jangan mengarang jawaban; sampaikan dengan sopan bahwa produk tersebut tidak tersedia atau data belum tercatat.\n4. Gunakan bahasa Indonesia yang ramah, sopan, dan mudah dipahami."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "ce58daf1-5aa7-48d3-b521-0f483476bc70",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        208
+      ],
+      "id": "43dfb82d-ba57-4fe4-b100-2387ecb888c3",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        208
+      ],
+      "id": "4698631e-9fdd-4bde-9800-f4fa95a53a3f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "CNfS5ykgj0mEl3l6",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "10WK9H_6V2hnbcirIxthgPnh07NsjdWUdzrvTRnLuxU0",
+          "mode": "list",
+          "cachedResultName": "tugas 2 pertemuan 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10WK9H_6V2hnbcirIxthgPnh07NsjdWUdzrvTRnLuxU0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10WK9H_6V2hnbcirIxthgPnh07NsjdWUdzrvTRnLuxU0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        384,
+        208
+      ],
+      "id": "c98851c6-76ab-41bb-8049-2e4f69a126c8",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "0NgvXlx7BTJR9xsn",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d942f379-96ca-4fd8-b8c1-62c5df972abf",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4c14392cee9c8f4dc3f9bd8a806b6a2941e16548528905bb09c32b7bc02df472"
+  },
+  "nodeGroups": [],
+  "id": "sor0Gpe0T1D0RbOS",
+  "tags": []
+}
