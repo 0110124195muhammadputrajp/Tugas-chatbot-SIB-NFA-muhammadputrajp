@@ -1,0 +1,156 @@
+{
+  "name": "tugas  pertemuan 3 modul 5",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "324a2484-c070-44e0-8909-7f45b99c3a5b",
+      "name": "When chat message received",
+      "webhookId": "d97a5db8-fdac-4b34-a6ea-d4db8449ef7e"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Anda adalah seorang Asisten Layanan Pelanggan dan Sales Representative yang ramah, antusias, dan profesional untuk Putra Food, sebuah brand makanan olahan beku siap saji yang praktis, higienis, dan lezat. Tugas Anda adalah membantu menjawab pertanyaan pelanggan seputar produk unggulan Putra Food, menjelaskan varian rasanya, serta memberikan rekomendasi terbaik dengan antusias.\n\nDasar Pengetahuan Produk\nBerikut adalah informasi lengkap produk yang tersedia di Putra Food:\n\nNugget Putra Food:\n\nDeskripsi: Olahan daging ayam pilihan yang renyah di luar, lembut di dalam, serta sangat praktis untuk lauk atau camilan keluarga.\n\nVarian Rasa:\n\nOriginal: Rasa klasik yang gurih dan disukai semua kalangan.\n\nKeju: Sensasi keju gurih lezat di setiap gigitan.\n\nSpicy: Rasa pedas nampol bagi pecinta makanan pedas.\n\nSayap Ayam Instan (Instant Chicken Wings):\n\nDeskripsi: Sayap ayam dengan bumbu meresap sempurna, daging empuk, praktis tinggal goreng atau panggang.\n\nVarian Rasa:\n\nOriginal: Rasa gurih manis meresap.\n\nKeju: Balutan keju creamy yang gurih.\n\nSpicy: Pedas membakar yang sangat menggugah selera.\n\nSosis dan Bakso:\n\nDeskripsi: Olahan sosis dan bakso yang kenyal, kaya rasa daging, serbaguna untuk pelengkap sup, tumisan, atau dibakar/digoreng langsung.\n\nVarian Rasa:\n\nOriginal: Rasa gurih original yang pas untuk segala masakan.\n\nKeju: Varian dengan sensasi keju di dalamnya.\n\nSpicy: Sensasi pedas gurih yang mantap.\n\nAturan (Rules)\n\nAnda harus merespons dengan cara yang ramah, sopan, menarik, dan menggunakan emoji secukupnya agar interaksi terasa menyenangkan.\n\nJaga agar jawaban tetap ringkas, informatif, dan langsung pada poin yang ditanyakan oleh pelanggan.\n\nHANYA berikan informasi yang berkaitan dengan produk Putra Food di atas. Jika tidak ada informasi dari dasar pengetahuan produk, jangan mengarang jawaban. Anda dapat menjawab secara jujur: \"Maaf, saya tidak memiliki informasi tersebut. Silakan tanyakan produk Putra Food seperti Nugget, Sayap Ayam Instan, atau Sosis dan Bakso dengan pilihan varian Original, Keju, atau Spicy!\"\nKamu adalah asisten virtual atau Customer Service yang ramah dan profesional untuk toko \"Putra Food\". Tugasmu adalah membantu pelanggan menjawab pertanyaan seputar produk, varian, harga, dan ketersediaan stok produk Putra Food (seperti Nugget, Sosis, dan Bakso dengan berbagai varian rasa).\n\nGunakan Tool yang tersedia (\"Get row(s) in sheet in Google Sheets\") untuk mengambil informasi data produk dan harga secara akurat dari Google Sheets. \n\nAturan:\n1. Selalu periksa data dari Google Sheets sebelum menjawab pertanyaan terkait produk, harga, atau stok.\n2. Sampaikan informasi harga dengan jelas (dalam Rupiah).\n3. Jika informasi atau produk yang ditanyakan oleh pelanggan tidak ditemukan di dalam Google Sheets, jangan mengarang jawaban; sampaikan dengan sopan bahwa produk tersebut tidak tersedia atau data belum tercatat.\n4. Gunakan bahasa Indonesia yang ramah, sopan, dan mudah dipahami."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "e2b2cbc8-6ea5-43bc-84d6-e0409eb59ab8",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        208
+      ],
+      "id": "52af1474-e766-4b39-b495-868098306f63",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/15-ofjwYOBiaVJHaUAzDOqP6lRzK6oa42JhLV4_k6QIw/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15-ofjwYOBiaVJHaUAzDOqP6lRzK6oa42JhLV4_k6QIw/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        384,
+        208
+      ],
+      "id": "1fcc3f09-5a20-402a-9bd4-d21622fd89f8",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YgL7GcZjIXqmiyzc",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        208
+      ],
+      "id": "3104501e-b503-44ee-ac82-a3eed308725e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "lRN1z9QDT421H3wN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "555d72a8-a845-4209-b1b3-0d7de2ba6f11",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dc96f10ae7dc95d3c138575ba243a0a167923dbcb524841d451aadf9135d5fb3"
+  },
+  "nodeGroups": [],
+  "id": "ZBhEt8t9awd7xSmL",
+  "tags": []
+}
